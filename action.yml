@@ -1,0 +1,16 @@
+name: "SPFGuard — RFC 7208 10-Lookup Analyzer & Flattener"
+description: "Prevent SPF PermError (>10 DNS lookups) and validate RFC 8461 MTA-STS policies in CI/CD."
+author: "profalexandrezamboni-ui"
+branding:
+  icon: "shield"
+  color: "green"
+inputs:
+  domain:
+    description: "Domain to analyze (e.g. example.com)"
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Run SPFGuard Check
+      shell: bash
+      run: python3 "${{ github.action_path }}/spfguard_engine.py"
